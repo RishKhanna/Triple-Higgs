@@ -1,12 +1,12 @@
 # Constants
-HOME_DIR = '/home2/kshitijaa/higgs-self-coupling/'
+HOME_DIR = '/home2/ashu_bharadwaj/higgs-self-coupling/'
 CODE_DIR = HOME_DIR + 'codes/bin/'
 DELPHES_FILE = '/Events/run_01/tag_1_delphes_events.root'
-MADGRAPH_DIR = '/home2/kshitijaa/apps/madgraph/'
+MADGRAPH_DIR = '/home2/ashu_bharadwaj/apps/madgraph/'
 DATASET_DIR = HOME_DIR + 'datasets/csvdata/'
-TXT_DIR = '/home2/kshitijaa/scratch/'
+TXT_DIR = '/home2/ashu_bharadwaj/scratch/'
 OUTPUT_DIR = '/scratch/higgs-self-coupling-decay/'
-GIT_DIR = '/home2/kshitijaa/higgs-self-coupling/'
+GIT_DIR = '/home2/ashu_bharadwaj/higgs-self-coupling/'
 MN2 = 750
 
 RUN_MADGRAPH = True

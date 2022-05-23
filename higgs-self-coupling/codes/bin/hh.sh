@@ -7,6 +7,5 @@
 #SBATCH --mail-user=rishabh.khanna@research.iiit.ac.in
 #SBATCH --mail-type=ALL
 
-python /home2/rishabhk/higgs-self-coupling/codes/bin/proc.py hh True >> ~/logs/hh.txt
-python ../source/7vec.py /scratch/higgs-self-coupling-decay/hh/Events/run_01/tag_1_delphes_events.root
-scp -r /scratch/higgs-self-coupling-decay/hh ada:/share1/rishabhk/higgs-self/
+python /home2/ashu_bharadwaj/higgs-self-coupling/codes/bin/proc.py hh True >> ~/logs/hh.txt
+scp -r /scratch/higgs-self-coupling-decay/hh/Events/run_01/tag_1_delphes_events.root ada:/share1/ashu_bharadwaj/higgs-self/

@@ -15,15 +15,15 @@ from config import *
 
 def proc_to_gen(proc, signal = 'hh'):
     ret_val = ''
-    if proc == 'hh' and signal == 'hh':
+    if proc == 'hh' and signal == 'hh': 
 
         # Original Decay
         ret_val += 'generate pb pb > h > h h, '
-        ret_val += '(h > b b~), (h > w w, w > la vla)\n'
+        ret_val += '(h > b b~), (h > wa wa, wa > la vla)\n'
 
         # Combinatorics on the Decay
         ret_val += 'add process pb pb > h > h h, '
-        ret_val += '(h > w w, w > la vla), (h > b b~)\n'
+        ret_val += '(h > wa wa, wa > la vla), (h > b b~)\n'
 
     elif proc == 'ttbar' and signal == 'hh':
 
@@ -31,31 +31,27 @@ def proc_to_gen(proc, signal = 'hh'):
         ret_val += 'generate pb pb > t t~, '
         ret_val += '(t > w+ b, w+ > l+ vl), (t~ > w- b~, w- > l- vl~)\n'
 
-        # Original Decay with One Jet
-        ret_val += 'add process pb pb > t t~ j, '
-        ret_val += '(t > w+ b, w+ > l+ vl), (t~ > w- b~, w- > l- vl~)\n'
-
     elif proc == 'twj' and signal == 'hh':
         
         # Decay
-        ret_val += 'generate pb pb > t w, (w > la vla), (t > w b,w > la vla)\n'
+        ret_val += 'generate pb pb > t wa, (wa > la vla), (t > wa b,wa > la vla)\n'
 
         # Alternate Decay
-        ret_val += 'add process pb pb > t~ w, (w > la vla), (t~ > w b~,w > la vla)\n'
+        ret_val += 'add process pb pb > t~ wa, (wa > la vla), (t~ > wa b~,wa > la vla)\n'
 
         # Decay with One Jets
-        ret_val += 'add process pb pb > t w j,(w > la vla), (t > w b,w > la vla)\n'
+        ret_val += 'add process pb pb > t wa j,(wa > la vla), (t > wa b,wa > la vla)\n'
 
         # Alternative Decay with One Jet
-        ret_val += 'add process pb pb > t~ w j, (w > la vla), (t~ > w b~,w > la vla)\n'
+        ret_val += 'add process pb pb > t~ wa j, (wa > la vla), (t~ > wa b~,wa > la vla)\n'
 
     elif proc == 'llbj' and signal == 'hh':
         
         # Decay
-        ret_val += 'generate pb pb > la la b\n'
+        ret_val += 'generate pb pb > la la b j\n'
 
         # Adding the Jets
-        ret_val += 'add process pb pb > la la b j\n' 
+        # ret_val += 'add process pb pb > la la b j\n' 
 
     elif proc == 'tth' and signal == 'hh':
 
@@ -63,16 +59,34 @@ def proc_to_gen(proc, signal = 'hh'):
         ret_val += 'generate pb pb > t t~ h, (t > b w+, w+ > l+ vl), (t~ > b~ w-, w- > l- vl~)\n'
 
         # Decay with One Jet
-        ret_val += 'add process pb pb > t t~ h j, (t > b w+, w+ > l+ vl), (t~ > b~ w-, w- > l- vl~)\n'
+        # ret_val += 'add process pb pb > t t~ h j, (t > b w+, w+ > l+ vl), (t~ > b~ w-, w- > l- vl~)\n'
 
     elif proc == 'taubb' and signal == 'hh':
-        ret_val += 'generate pb pb > ta ta~ b b, (ta+ > w+ vl, w+ l+ vl), (ta- > w- vl~, w- > l- vl~)\n'
+        ret_val += 'generate pb pb > ta+ ta- b b, (ta+ > w+ vl, w+ > l+ vl), (ta- > w- vl~, w- > l- vl~)\n'
 
-        ret_val += 'add process pb pb > ta ta~ b b j, (ta+ > w+ vl, w+ l+ vl), (ta- > w- vl~, w- > l- vl~)\n'
+        # ret_val += 'add process pb pb > ta+ ta- b b j, (ta+ > w+ vl, w+ l+ vl), (ta- > w- vl~, w- > l- vl~)\n'
 
     elif proc == 'ttV' and signal == 'hh':
-        ret_val += 'generate pb pb > t t~ w, (t > b w+, w+ > l+ vl), (t~ > b~ w-, w- > l- vl~)\n'
-        ret_val += 'add process pb pb > t t~ z, (t > b w+, w+ > l+ vl), (t~ > b~ w-, w- > l- vl~)\n'
+        # jets from neither
+        ret_val += 'generate pb pb > t t~ wa, (t > b w+, w+ > l+ vl), (t~ > b~ w-, w- > l- vl~), (wa > j j)\n'
+        ret_val += 'add process pb pb > t t~ wa, (t > b w+, w+ > l+ vl), (t~ > b~ w-, w- > l- vl~), (wa > la vla)\n'
+        ret_val += 'add process pb pb > t t~ z, (t > b w+, w+ > l+ vl), (t~ > b~ w-, w- > l- vl~), (z > j j)\n'
+        ret_val += 'add process pb pb > t t~ z, (t > b w+, w+ > l+ vl), (t~ > b~ w-, w- > l- vl~), (z > l+ l-)\n'
+        ret_val += 'add process pb pb > t t~ z, (t > b w+, w+ > l+ vl), (t~ > b~ w-, w- > l- vl~), (z > vl vl~)\n'
+
+        # jet from w+
+        ret_val += 'add process pb pb > t t~ wa, (t > b w+, w+ > j j), (t~ > b~ w-, w- > l- vl~), (wa > la vla)\n'
+        ret_val += 'add process pb pb > t t~ z, (t > b w+, w+ > j j), (t~ > b~ w-, w- > l- vl~), (z > l+ l-)\n' # ???
+
+        # jet from w-
+        ret_val += 'add process pb pb > t t~ wa, (t > b w+, w+ > l+ vl), (t~ > b~ w-, w- > j j), (wa > la vla)\n'
+        ret_val += 'add process pb pb > t t~ z, (t > b w+, w+ > l+ vl), (t~ > b~ w-, w- > j j), (z > l+ l-)\n'  # ???
+
+        # jet from both
+        ret_val += 'add process pb pb > t t~ z, (t > b w+, w+ > j j), (t~ > b~ w-, w- > j j), (z > l+ l-)\n' # ???
+
+    elif proc == 'jjllvv' and signal == 'hh':|
+        ret_val += "generate pb pb > j j l+ l- vl vl~\n"
 
     return ret_val
 
@@ -91,7 +105,7 @@ def jet_matching(proc):
     ret_val = ''
 
     # Matching for ttbar at 1 Jet
-    if proc in ['ttbar','twj']:
+    if proc in ['twj']:
         ret_val += 'set xqcut 20\n'
         ret_val += 'set JetMatching:qCut 30\n'
         ret_val += 'set JetMatching:nJetMax 1\n'
@@ -135,7 +149,7 @@ def main(proc_name,sig_flag,gen_proc = True):
         # Default Import and Variable Definitions
         f.write('import model heft\n')
         f.write('define pb = p b b~\n')
-        f.write('define w = w+ w-\n')
+        f.write('define wa = w+ w-\n')
         f.write('define la = l+ l-\n')
         f.write('define vla = vl vl~\n')
 
@@ -150,12 +164,13 @@ def main(proc_name,sig_flag,gen_proc = True):
         f.write('set nevents ' + str(EVENT_NUM) + '\n')
         f.write('set ebeam1 7000.0\nset ebeam2 7000.0\n')
         f.write(jet_matching(proc_name))
-        f.write(gen_cuts())
+        # f.write(gen_cuts())
         f.write('set iseed ' + str(i) + '\n')
 
         # True only for Background
         if not sig_flag:
             f.write('set cut_decays True\n')
+        # f.write("set cut_decays False\n")
 
         # Closing the file
         f.close()
@@ -167,11 +182,11 @@ def main(proc_name,sig_flag,gen_proc = True):
                                  TXT_DIR + proc_name + '.txt'])
             p.wait()
 
-            p = subprocess.Popen([CODE_DIR + 'dtset', 
-                                  OUTPUT_DIR + proc_name + DELPHES_FILE,
-                                  DATASET_DIR + proc_name + str(i) + '.csv'])
+            # p = subprocess.Popen([CODE_DIR + 'dtset', 
+            #                       OUTPUT_DIR + proc_name + DELPHES_FILE,
+            #                       DATASET_DIR + proc_name + str(i) + '.csv'])
             
-            p.wait()
+            # p.wait()
             
             ## Deleting Garbage
             #os.system('rm -rf ' + OUTPUT_DIR + proc_name)
